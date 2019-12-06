@@ -39,8 +39,10 @@ const TagManager = {
       preview
     })
     if (dataLayer) document.head.appendChild(gtm.dataScript)
-    document.head.insertBefore(gtm.script(), document.head.childNodes[0])
-    document.body.insertBefore(gtm.noScript(), document.body.childNodes[0])
+    if(!document.querySelector('head script[src^="https://www.googletagmanager.com/gtm.js"]'))
+      document.head.insertBefore(gtm.script(), document.head.childNodes[0])
+    if(!document.querySelector('body iframe[src^="https://www.googletagmanager.com/ns.html"]'))
+      document.body.insertBefore(gtm.noScript(), document.body.childNodes[0])
   },
   dataLayer: function ({dataLayer, dataLayerName = 'dataLayer'}) {
     if (window[dataLayerName]) return window[dataLayerName].push(dataLayer)
