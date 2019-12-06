@@ -19,8 +19,13 @@ const Snippets = {
         var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';
         j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl+'${gtm_auth}${gtm_preview}&gtm_cookies_win=x';
         
-        j.addEventListener('load', function() {
-          var _ge = new CustomEvent('gtm_loaded', { bubbles: true });
+        j.addEventListener('load', function(e) {
+          var _ge = new CustomEvent('gtm_loaded', { event:e, bubbles: true });
+          d.dispatchEvent(_ge);
+        });
+
+        j.addEventListener('error', function(e) {
+          var _ge = new CustomEvent('gtm_error', { event:e, bubbles: true });
           d.dispatchEvent(_ge);
         });
         
