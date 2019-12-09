@@ -64,7 +64,10 @@ var TagManager = {
 
 		if (dataLayer) document.head.appendChild(gtm.dataScript);
 
-		if (!document.querySelector('head script#gtm-loader')) document.head.insertBefore(gtm.script(), document.head.childNodes[0]);
+		var scriptFound = document.querySelector('head script#gtm') || document.querySelector('head script[src^="https://www.googletagmanager.com/gtm.js?"]');
+		var scriptLoaderFound = document.querySelector('head script#gtm-loader');
+
+		if (!scriptFound && !scriptLoaderFound) document.head.insertBefore(gtm.script(), document.head.childNodes[0]);
 
 		// kill this because it would never run...
 		//if(!document.querySelector('body iframe[src^="https://www.googletagmanager.com/ns.html"]'))
